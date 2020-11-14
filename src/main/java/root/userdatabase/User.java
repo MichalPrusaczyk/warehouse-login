@@ -1,6 +1,8 @@
 package root.userdatabase;
 
 public class User {
+    private String name;
+    private String surname;
     private String login;
     private String pass;
 
