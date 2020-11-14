@@ -1,19 +1,22 @@
 package root.gui;
 
-import root.productdatabase.Aluminium;
-import root.productdatabase.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import root.model.Aluminium;
+import root.model.Product;
 import root.productdatabase.ProductRepository;
-import root.productdatabase.Steel;
+import root.model.Steel;
 
 import java.util.List;
 import java.util.Scanner;
-
+@Component
 public class GUI2 {
 
-        private static Scanner scanner = new Scanner(System.in);
-        private static ProductRepository productRepository = ProductRepository.getInstance();
+        private Scanner scanner = new Scanner(System.in);
+        @Autowired
+        private ProductRepository productRepository;
 
-        public static void showMainMenu2(){
+        public  void showMainMenu2(){
             System.out.println("1. Add product");
             System.out.println("2. Remove product");
             System.out.println("3. Display products");
@@ -43,7 +46,7 @@ public class GUI2 {
                     break;
             }
         }
-        private static void showAllProducts(){
+        private  void showAllProducts(){
 
             List<Product> products = productRepository.getAllProducts();
             for(Product currentProduct : products){
@@ -51,7 +54,7 @@ public class GUI2 {
             }
         }
 
-        private static void deliverProduct(){
+        private  void deliverProduct(){
             System.out.println("Set name");
             String productToDeliver = scanner.nextLine();
 
@@ -76,7 +79,7 @@ public class GUI2 {
             }
         }
 
-        private static void addProduct(){
+        private  void addProduct(){
             System.out.println("Set product name");
             String productName = scanner.nextLine();
             Product productFromDatabase = productRepository.findProduct(productName);
@@ -90,7 +93,7 @@ public class GUI2 {
                 addNewProduct(productName);
             }
         }
-        private static void addNewProduct(String productName){
+        private  void addNewProduct(String productName){
             System.out.println("1. Steel");
             System.out.println("2. Aluminium");
             DataWrapper dataWrapper;
@@ -117,7 +120,7 @@ public class GUI2 {
 
         }
 
-        private static DataWrapper readCommonData() {
+        private  DataWrapper readCommonData() {
             try {
                 System.out.println("Set shape");
                 String shape = scanner.nextLine();

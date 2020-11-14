@@ -1,12 +1,15 @@
 package root.productdatabase;
 
+import org.springframework.stereotype.Component;
+import root.model.Aluminium;
+import root.model.Product;
+import root.model.Steel;
+
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class ProductRepository {
     private List<Product> products = new ArrayList<>();
-    private static ProductRepository productRepository = new ProductRepository();
-
 
     ProductRepository(){
         this.products.add(new Steel("steel","square",300.00,"50x50"));
@@ -16,10 +19,6 @@ public class ProductRepository {
 
     }
 
-    public static ProductRepository getInstance(){
-        return productRepository;
-    }
-
     public List<Product> getAllProducts(){
         return this.products;
     }
@@ -27,7 +26,7 @@ public class ProductRepository {
         for(Product currentProduct : this.products){
             if(currentProduct.getName().equals(productName)&& currentProduct.getShape().equals(productShape)
                     && currentProduct.getSize().equals(productSize) && currentProduct.getLength() >= length){
-                currentProduct.setLength(currentProduct.getLength());
+                currentProduct.setLength(currentProduct.getLength()-length);
                 return true;
             }
         }

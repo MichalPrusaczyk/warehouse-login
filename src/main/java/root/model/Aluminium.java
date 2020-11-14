@@ -1,4 +1,4 @@
-package root.productdatabase;
+package root.model;
 
 public class Aluminium extends Product{
 //    private String aluminiumSize;

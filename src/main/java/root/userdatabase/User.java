@@ -32,4 +32,8 @@ public class User {
                 ", pass='" + pass + '\'' +
                 '}';
     }
+
+    public User copy(User user){
+        return new User(this.getLogin(), this.getPass());
+    }
 }

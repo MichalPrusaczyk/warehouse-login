@@ -1,23 +1,18 @@
-package eu.prusaczyk.login.database;
+package root.userdatabase;
 
-import root.userdatabase.IUserRepository;
-import root.userdatabase.User;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class UsersRepository implements IUserRepository {
     private List<User> userList = new ArrayList<>();
-    private static final UsersRepository usersRepository = new UsersRepository();
 
-    private UsersRepository() {
+    public UsersRepository() {
         this.userList.add(new User("admin",DigestUtils.md5Hex( "admin")));
     }
 
-    public static UsersRepository getInstance(){
-        return usersRepository;
-    }
     public boolean authenticate(String login, String pass){
         for(User user : userList){
             if(user.getLogin().equals(login)){

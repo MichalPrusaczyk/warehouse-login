@@ -1,21 +1,24 @@
 package root.gui;
 
-import eu.prusaczyk.login.database.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import root.userdatabase.IUserRepository;
 import root.userdatabase.User;
+
 
 import java.util.List;
 import java.util.Scanner;
 
-import static root.gui.GUI2.showMainMenu2;
 
+@Component
 public class GUI1 {
+    private Scanner scanner = new Scanner(System.in);
+    @Autowired
+    private IUserRepository usersRepository;
+    @Autowired
+    GUI2 gui2;
 
-
-    private static Scanner scanner = new Scanner(System.in);
-    private static IUserRepository usersRepository = UsersRepository.getInstance();
-
-    public static void showMainMenu(){
+    public  void showMainMenu(){
         System.out.println("1. Login");
         System.out.println("2. Register");
 
@@ -40,7 +43,7 @@ public class GUI1 {
         }
     }
 
-    private static void showLoginScreen(){
+    private  void showLoginScreen(){
         System.out.println("Please set your login");
         String login = scanner.nextLine();
         System.out.println("Please set your password");
@@ -49,13 +52,13 @@ public class GUI1 {
         boolean authenticationResult = usersRepository.authenticate(login, pass);
 
         if (authenticationResult) {
-            showMainMenu2();
+            gui2.showMainMenu2();
         } else {
             System.out.println("Incorrect password or login");
         }
     }
 
-    private static void showRegisterScreen(){
+    private  void showRegisterScreen(){
         System.out.println("Set login");
         String login = scanner.nextLine();
         System.out.println("Set password");
@@ -69,7 +72,7 @@ public class GUI1 {
             System.out.println("Invalid login");
         }
     }
-    private static void showDatabase(){
+    private  void showDatabase(){
         List<User> userList = usersRepository.getUserList();
         for(User user : userList){
             System.out.println(userList);
